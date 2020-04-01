@@ -359,6 +359,7 @@ use the \"--with-mail_ssl_module\" option instead"
         --with-pcre-jit)                 PCRE_JIT=YES               ;;
 
         --with-openssl=*)                OPENSSL="$value"           ;;
+        --with-openssl-use)              USE_OPENSSL=YES            ;;
         --with-openssl-opt=*)            OPENSSL_OPT="$value"       ;;
 
         --with-md5=*)
@@ -584,6 +585,7 @@ cat << END
   --with-libatomic=DIR               set path to libatomic_ops library sources
 
   --with-openssl=DIR                 set path to OpenSSL library sources
+  --with-openssl-use                 set USE_OPENSSL=YES
   --with-openssl-opt=OPTIONS         set additional build options for OpenSSL
 
   --with-debug                       enable debug logging

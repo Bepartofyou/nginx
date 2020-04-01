@@ -118,6 +118,24 @@ else
             . auto/feature
         fi
 
+        if [ $ngx_found = no ]; then
+
+            # MacOsPorts
+
+            ngx_feature="OpenSSL library in /usr/local/opt/openssl/include"
+            ngx_feature_path="/usr/local/opt/openssl/include"
+
+            if [ $NGX_RPATH = YES ]; then
+                ngx_feature_libs="-R/usr/local/opt/openssl/lib -L/usr/local/opt/openssl/lib -lssl -lcrypto"
+            else
+                ngx_feature_libs="-L/usr/local/opt/openssl/lib -lssl -lcrypto"
+            fi
+
+            ngx_feature_libs="$ngx_feature_libs $NGX_LIBDL $NGX_LIBPTHREAD"
+
+            . auto/feature
+        fi
+
         if [ $ngx_found = yes ]; then
             have=NGX_SSL . auto/have
             CORE_INCS="$CORE_INCS $ngx_feature_path"
