@@ -389,6 +389,12 @@ if test -n "$MISC_SRCS"; then
 
     for ngx_src in $MISC_SRCS
     do
+        if [ "${ngx_src##*.}"x = "cc"x ]||[ "${ngx_src##*.}"x = "cpp"x ]; then
+            ngx_cc="\$(CPP) $ngx_compile_opt \$(CFLAGS) $ngx_use_pch \$(ALL_INCS)"
+        else
+            ngx_cc="\$(CC) $ngx_compile_opt \$(CFLAGS) $ngx_use_pch \$(ALL_INCS)"
+        fi
+
         ngx_src=`echo $ngx_src | sed -e "s/\//$ngx_regex_dirsep/g"`
         ngx_obj=`echo $ngx_src \
             | sed -e "s#^\(.*\.\)cpp\\$#$ngx_objs_dir\1$ngx_objext#g" \

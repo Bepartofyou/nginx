@@ -32,5 +32,6 @@ export LINK=/usr/bin/g++
 --with-linker="$LINK" \
 --with-cc="$CC -std=gnu11" \
 --with-cpp="$CPP -std=c++11" \
+--with-cpp_test_module \
 # --with-cc-opt="-g -O0" \
 # --with-ld-opt="-g -static-libstdc++ -static-libgcc" \
