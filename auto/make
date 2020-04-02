@@ -17,6 +17,9 @@ mkdir -p $NGX_OBJS/src/core $NGX_OBJS/src/event $NGX_OBJS/src/event/modules \
 ngx_objs_dir=$NGX_OBJS$ngx_regex_dirsep
 ngx_use_pch=`echo $NGX_USE_PCH | sed -e "s/\//$ngx_regex_dirsep/g"`
 
+if test -n "$LINKER"; then
+    LINK="$LINKER"
+fi
 
 cat << END                                                     > $NGX_MAKEFILE
 
@@ -412,6 +415,12 @@ if test -n "$NGX_ADDON_SRCS"; then
 
     for ngx_src in $NGX_ADDON_SRCS
     do
+        if [ "${ngx_src##*.}"x = "cc"x ]||[ "${ngx_src##*.}"x = "cpp"x ]; then
+            ngx_cc="\$(CPP) $ngx_compile_opt \$(CFLAGS) $ngx_use_pch \$(ALL_INCS)"
+        else
+            ngx_cc="\$(CC) $ngx_compile_opt \$(CFLAGS) $ngx_use_pch \$(ALL_INCS)"
+        fi
+
         ngx_obj="addon/`basename \`dirname $ngx_src\``"
 
         ngx_obj=`echo $ngx_obj/\`basename $ngx_src\` \
