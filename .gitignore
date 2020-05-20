@@ -1,3 +1,8 @@
 modules/
 Makefile
 objs/
+task/
+prebuild.sh
+start.sh
+config.sh
+.vscode/
